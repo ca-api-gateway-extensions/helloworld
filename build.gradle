@@ -1,0 +1,33 @@
+group 'com.ca'
+version '0.1.00'
+
+apply plugin: 'com.ca.apim.gateway.modular-assertion-builder'
+apply plugin: 'idea'
+
+buildscript {
+    repositories {
+        mavenLocal()
+    }
+    dependencies {
+        classpath 'com.ca.apim.gateway:ModularAssertionBuilder:0.3.01-SNAPSHOT'
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'lib'
+    }
+    mavenCentral()
+}
+
+modularAssertionBuilder {
+    gatewayBaseVersion = '9.2.00'
+    assertionName='Hello-World-Assertion'
+}
+
+dependencies {
+    testCompile(
+            "junit:junit:4.12",
+            "org.mockito:mockito-core:1.10.19",
+    )
+}

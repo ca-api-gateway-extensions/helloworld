@@ -1,0 +1,6 @@
+# Root files to ignore
+/.idea/
+/.gradle/
+/build/
+.DS_Store
+/lib
