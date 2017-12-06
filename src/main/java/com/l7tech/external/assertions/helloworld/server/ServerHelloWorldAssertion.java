@@ -9,9 +9,6 @@ import com.l7tech.server.policy.assertion.AbstractServerAssertion;
 
 import java.io.IOException;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 /**
  * Server side implementation of the HelloWorldAssertion.
  *
@@ -20,18 +17,13 @@ import javax.inject.Named;
 public class ServerHelloWorldAssertion extends AbstractServerAssertion<HelloWorldAssertion> {
     private final String[] variablesUsed;
 
-// DELETEME example for dependency injection
-//    @Inject
-//    @Named("foo") -- The name is not usually required and should be left out if possible
-//    private Foo foo;
-
-    public ServerHelloWorldAssertion( final HelloWorldAssertion assertion ) throws PolicyAssertionException {
+    public ServerHelloWorldAssertion(final HelloWorldAssertion assertion) throws PolicyAssertionException {
         super(assertion);
 
         this.variablesUsed = assertion.getVariablesUsed();
     }
 
-    public AssertionStatus checkRequest( final PolicyEnforcementContext context ) throws IOException, PolicyAssertionException {
+    public AssertionStatus checkRequest(final PolicyEnforcementContext context) throws IOException, PolicyAssertionException {
         context.getResponse().initialize(ContentTypeHeader.TEXT_DEFAULT, "HelloWorld".getBytes());
         return AssertionStatus.NONE;
     }

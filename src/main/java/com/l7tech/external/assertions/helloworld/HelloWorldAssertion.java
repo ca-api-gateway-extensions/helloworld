@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 /**
- * 
+ *
  */
 public class HelloWorldAssertion extends Assertion implements UsesVariables {
     protected static final Logger logger = Logger.getLogger(HelloWorldAssertion.class.getName());
@@ -44,11 +44,14 @@ public class HelloWorldAssertion extends Assertion implements UsesVariables {
         // Add to palette folder(s) 
         //   accessControl, transportLayerSecurity, xmlSecurity, xml, routing, 
         //   misc, audit, policyLogic, threatProtection 
-        meta.put(AssertionMetadata.PALETTE_FOLDERS, new String[] { "policyLogic" });
+        meta.put(AssertionMetadata.PALETTE_FOLDERS, new String[]{"policyLogic"});
         meta.put(AssertionMetadata.PALETTE_NODE_ICON, "com/l7tech/console/resources/MessageLength-16x16.gif");
 
         // Enable automatic policy advice (default is no advice unless a matching Advice subclass exists)
         meta.put(AssertionMetadata.POLICY_ADVICE_CLASSNAME, "auto");
+
+        // Specify the properties editor dialog class
+        meta.put(AssertionMetadata.PROPERTIES_EDITOR_CLASSNAME, "com.l7tech.external.assertions.helloworld.console.HelloWorldAssertionPropertiesDialog");
 
         // Set up smart Getter for nice, informative policy node name, for GUI
         meta.put(AssertionMetadata.POLICY_NODE_ICON, "com/l7tech/console/resources/MessageLength-16x16.gif");
