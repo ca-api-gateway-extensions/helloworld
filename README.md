@@ -17,6 +17,8 @@ In order to build modular assertions some gateway jars are required they need to
 * layer7-gateway-console-9.2.00.jar
   * This is the `Manager.jar` from the policy manager.
 
+## How You Can Contribute
+Contributions are welcome and much appreciated. To learn more, see the [Contribution Guidelines][contributing].
 
 ## License
 
@@ -27,3 +29,4 @@ of the MIT license. See the [LICENSE][license-link] file for details.
 
 
  [license-link]: /LICENSE
+ [contributing]: /CONTRIBUTING.md
