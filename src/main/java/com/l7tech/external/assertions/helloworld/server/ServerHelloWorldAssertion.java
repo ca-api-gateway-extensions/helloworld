@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2017 CA. All rights reserved.
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ */
+
 package com.l7tech.external.assertions.helloworld.server;
 
 import com.l7tech.common.mime.ContentTypeHeader;
@@ -14,16 +20,17 @@ import java.io.IOException;
  *
  * @see com.l7tech.external.assertions.helloworld.HelloWorldAssertion
  */
+@SuppressWarnings("unused")
 public class ServerHelloWorldAssertion extends AbstractServerAssertion<HelloWorldAssertion> {
     private final String[] variablesUsed;
 
-    public ServerHelloWorldAssertion(final HelloWorldAssertion assertion) throws PolicyAssertionException {
+    public ServerHelloWorldAssertion(final HelloWorldAssertion assertion) {
         super(assertion);
 
         this.variablesUsed = assertion.getVariablesUsed();
     }
 
-    public AssertionStatus checkRequest(final PolicyEnforcementContext context) throws IOException, PolicyAssertionException {
+    public AssertionStatus checkRequest(final PolicyEnforcementContext context) throws IOException {
         context.getResponse().initialize(ContentTypeHeader.TEXT_DEFAULT, "HelloWorld".getBytes());
         return AssertionStatus.NONE;
     }

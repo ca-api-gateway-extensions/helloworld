@@ -1,1 +1,2 @@
-Put gateway jars in here
+
+Put gateway jars in this folder

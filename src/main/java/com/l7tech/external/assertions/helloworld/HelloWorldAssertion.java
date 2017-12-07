@@ -1,40 +1,37 @@
+/*
+ * Copyright (c) 2017 CA. All rights reserved.
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ */
 package com.l7tech.external.assertions.helloworld;
 
 import com.l7tech.policy.assertion.Assertion;
-import com.l7tech.policy.assertion.UsesVariables;
 import com.l7tech.policy.assertion.AssertionMetadata;
 import com.l7tech.policy.assertion.DefaultAssertionMetadata;
+import com.l7tech.policy.assertion.UsesVariables;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
 /**
  *
  */
 public class HelloWorldAssertion extends Assertion implements UsesVariables {
-    protected static final Logger logger = Logger.getLogger(HelloWorldAssertion.class.getName());
 
     public String[] getVariablesUsed() {
-        return new String[0]; //Syntax.getReferencedNames(...);
+        return new String[0];
     }
 
-    //
-    // Metadata
-    //
     private static final String META_INITIALIZED = HelloWorldAssertion.class.getName() + ".metadataInitialized";
 
+    @Override
     public AssertionMetadata meta() {
         DefaultAssertionMetadata meta = super.defaultMeta();
         if (Boolean.TRUE.equals(meta.get(META_INITIALIZED)))
             return meta;
 
         // Cluster properties used by this assertion
-        Map<String, String[]> props = new HashMap<String, String[]>();
-        //props.put(NAME, new String[] {
-        //        DESCRIPTION,
-        //        DEFAULT
-        //});
+        Map<String, String[]> props = new HashMap<>();
         meta.put(AssertionMetadata.CLUSTER_PROPERTIES, props);
 
         // Set description for GUI
