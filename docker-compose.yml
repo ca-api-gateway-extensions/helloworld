@@ -8,11 +8,12 @@ services:
       - "8443:8443"
       - "9443:9443"
       - "8000:8000"
+      - "8081:8081"
     volumes:
       - /opt/SecureSpan/Gateway/node/default/etc/bootstrap/services/restman
       - ./license.xml:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/license/license.xml
       - ./build/libs/Hello-World-Assertion-0.1.01.aar:/opt/SecureSpan/Gateway/runtime/modules/assertions/Hello-World-Assertion-0.1.01.aar
-      - ./helloworld.bundle:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/helloworld.bundle
+      - ./docker/helloworld.req.bundle:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/helloworld.req.bundle
     environment:
       ACCEPT_LICENSE: "true"
       SSG_ADMIN_USERNAME: "admin"

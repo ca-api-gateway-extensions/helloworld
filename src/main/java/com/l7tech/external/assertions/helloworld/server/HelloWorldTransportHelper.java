@@ -11,13 +11,11 @@ import com.l7tech.server.transport.SsgConnectorManager;
 import com.l7tech.util.InetAddressUtil;
 import com.sun.net.httpserver.HttpExchange;
 
-import java.io.IOException;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.security.cert.X509Certificate;
-import java.text.ParseException;
 import java.util.Enumeration;
 import java.util.Map;
 
@@ -62,7 +60,7 @@ public final class HelloWorldTransportHelper {
             }
 
             @Override
-            public X509Certificate[] getClientCertificate() throws IOException {
+            public X509Certificate[] getClientCertificate() {
                 return new X509Certificate[0];
             }
 
@@ -107,7 +105,7 @@ public final class HelloWorldTransportHelper {
             }
 
             @Override
-            public String getSoapAction() throws IOException {
+            public String getSoapAction() {
                 return null;
             }
 
@@ -151,7 +149,7 @@ public final class HelloWorldTransportHelper {
             }
 
             @Override
-            public long getDateHeader(String s) throws ParseException {
+            public long getDateHeader(String s) {
                 return Long.valueOf(httpExchange.getRequestHeaders().get(s).toString());
             }
 
@@ -166,27 +164,27 @@ public final class HelloWorldTransportHelper {
             }
 
             @Override
-            public String getHeaderSingleValue(String s) throws IOException {
+            public String getHeaderSingleValue(String s) {
                 return httpExchange.getRequestHeaders().getFirst(s);
             }
 
             @Override
-            public String getParameter(String s) throws IOException {
+            public String getParameter(String s) {
                 return null;
             }
 
             @Override
-            public Map getParameterMap() throws IOException {
+            public Map getParameterMap() {
                 return null;
             }
 
             @Override
-            public String[] getParameterValues(String s) throws IOException {
+            public String[] getParameterValues(String s) {
                 return new String[0];
             }
 
             @Override
-            public Enumeration getParameterNames() throws IOException {
+            public Enumeration getParameterNames() {
                 return null;
             }
 

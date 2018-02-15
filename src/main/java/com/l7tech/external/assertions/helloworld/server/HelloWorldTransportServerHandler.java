@@ -78,7 +78,6 @@ public class HelloWorldTransportServerHandler implements HttpHandler {
      * @param requestKnob HttpRequestKnob for the message processor
      * @param message input line of text
      * @return prepared PolicyEnforcementContext instance
-     * @throws IOException
      */
     private PolicyEnforcementContext preparePolicyContext(final HttpRequestKnob requestKnob, final String message) throws IOException {
         final PolicyEnforcementContext context = createPolicyEnforcementContext(null, null);
@@ -101,7 +100,6 @@ public class HelloWorldTransportServerHandler implements HttpHandler {
      * Extracts the processed response from the message processor
      * @param context PolicyEnforcementContext instance
      * @return processed response from the message processor
-     * @throws IOException
      */
     private String extractResponse(final PolicyEnforcementContext context) throws IOException {
         String response = "";
@@ -109,7 +107,7 @@ public class HelloWorldTransportServerHandler implements HttpHandler {
         try {
             response = new String(IOUtils.slurpStream(context.getResponse().getMimeKnob().getEntireMessageBodyAsInputStream()), StandardCharsets.UTF_8.name());
         } catch (NoSuchPartException e) {
-            LOGGER.fine("Found response with no parts: " + ExceptionUtils.getMessage(e));
+            LOGGER.log(Level.FINE, "Found response with no parts: %s", ExceptionUtils.getMessage(e));
         }
 
         return response;
@@ -133,12 +131,12 @@ public class HelloWorldTransportServerHandler implements HttpHandler {
             if (AssertionStatus.NONE.equals(status)) {
                 return extractResponse(context);
             } else {
-                LOGGER.warning("Error encountered while processing the message: " + status);
+                LOGGER.log(Level.WARNING, "Error encountered while processing the message: %s", status);
                 return "Error: " + status;
             }
         } catch (PolicyVersionException pve) {
-            LOGGER.info("Request referred to an outdated version of policy");
-        } catch (Throwable t) {
+            LOGGER.log(Level.INFO, "Request referred to an outdated version of policy");
+        } catch (Exception t) {
             LOGGER.log(Level.WARNING, "Error encountered while processing the message: " + ExceptionUtils.getMessage(t), ExceptionUtils.getDebugException(t));
         } finally {
             HybridDiagnosticContext.remove(GatewayDiagnosticContextKeys.LISTEN_PORT_ID);

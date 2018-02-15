@@ -20,16 +20,16 @@ public class HelloWorldModuleLoadListener {
     @SuppressWarnings("UnusedDeclaration")
     public static synchronized void onModuleLoaded(ApplicationContext context) {
         if (transportModule != null) {
-            LOGGER.log(Level.WARNING, HelloWorldConstants.MODULE_IDENTITY_TAG + " transport module is already initialized");
+            LOGGER.log(Level.WARNING, "%s transport module is already initialized", HelloWorldConstants.MODULE_IDENTITY_TAG);
         } else {
-            LOGGER.log(Level.INFO, HelloWorldConstants.MODULE_IDENTITY_TAG + " transport module is starting");
+            LOGGER.log(Level.INFO, "%s transport module is starting", HelloWorldConstants.MODULE_IDENTITY_TAG);
             transportModule = HelloWorldTransportModule.getInstance(context);
 
             try {
                 transportModule.start();
             } catch (LifecycleException e) {
-                LOGGER.log(Level.WARNING,
-                        HelloWorldConstants.MODULE_IDENTITY_TAG + " transport module threw exception on startup: " + ExceptionUtils.getMessage(e), e);
+                LOGGER.log(Level.WARNING, e,
+                        () -> String.format("%s transport module threw exception on startup: %s", HelloWorldConstants.MODULE_IDENTITY_TAG, ExceptionUtils.getMessage(e)));
             }
         }
     }
@@ -41,13 +41,13 @@ public class HelloWorldModuleLoadListener {
     @SuppressWarnings("UnusedDeclaration")
     public static synchronized void onModuleUnloaded() {
         if (transportModule != null) {
-            LOGGER.log(Level.INFO, HelloWorldConstants.MODULE_IDENTITY_TAG + " transport module is shutting down");
+            LOGGER.log(Level.INFO, "%s transport module is shutting down", HelloWorldConstants.MODULE_IDENTITY_TAG);
 
             try {
                 transportModule.destroy();
             } catch (Exception e) {
-                LOGGER.log(Level.WARNING,
-                        HelloWorldConstants.MODULE_IDENTITY_TAG + " transport module threw exception on shutdown: " + ExceptionUtils.getMessage(e), e);
+                LOGGER.log(Level.WARNING, e,
+                        () -> String.format("%s transport module threw exception on shutdown: %s", HelloWorldConstants.MODULE_IDENTITY_TAG, ExceptionUtils.getMessage(e)));
             } finally {
                 transportModule = null;
             }

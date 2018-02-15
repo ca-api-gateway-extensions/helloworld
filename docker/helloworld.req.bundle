@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<l7:Bundle xmlns:l7="http://ns.l7tech.com/2010/04/gateway-management">
+    <l7:References>
+        <l7:Item>
+            <l7:Name>HelloWorld</l7:Name>
+            <l7:Id>43292ae12367e1367d6b21c08876d9c7</l7:Id>
+            <l7:Type>FOLDER</l7:Type>
+            <l7:Resource>
+                <l7:Folder folderId="0000000000000000ffffffffffffec76" id="43292ae12367e1367d6b21c08876d9c7">
+                    <l7:Name>HelloWorld</l7:Name>
+                </l7:Folder>
+            </l7:Resource>
+        </l7:Item>
+        <l7:Item>
+            <l7:Name>Hello World Scheme Handler</l7:Name>
+            <l7:Id>43292ae12367e1367d6b21c08876da0a</l7:Id>
+            <l7:Type>SERVICE</l7:Type>
+            <l7:Resource>
+                <l7:Service id="43292ae12367e1367d6b21c08876da0a">
+                    <l7:ServiceDetail folderId="43292ae12367e1367d6b21c08876d9c7" id="43292ae12367e1367d6b21c08876da0a">
+                        <l7:Name>Hello World Scheme Handler</l7:Name>
+                        <l7:Enabled>true</l7:Enabled>
+                        <l7:ServiceMappings>
+                            <l7:HttpMapping>
+                                <l7:UrlPattern>/helloworld.scheme.handler</l7:UrlPattern>
+                                <l7:Verbs>
+                                    <l7:Verb>GET</l7:Verb>
+                                    <l7:Verb>POST</l7:Verb>
+                                    <l7:Verb>PUT</l7:Verb>
+                                    <l7:Verb>DELETE</l7:Verb>
+                                </l7:Verbs>
+                            </l7:HttpMapping>
+                        </l7:ServiceMappings>
+                        <l7:Properties>
+                            <l7:Property key="internal">
+                                <l7:BooleanValue>false</l7:BooleanValue>
+                            </l7:Property>
+                            <l7:Property key="soap">
+                                <l7:BooleanValue>false</l7:BooleanValue>
+                            </l7:Property>
+                            <l7:Property key="tracingEnabled">
+                                <l7:BooleanValue>false</l7:BooleanValue>
+                            </l7:Property>
+                            <l7:Property key="wssProcessingEnabled">
+                                <l7:BooleanValue>false</l7:BooleanValue>
+                            </l7:Property>
+                        </l7:Properties>
+                    </l7:ServiceDetail>
+                    <l7:Resources>
+                        <l7:ResourceSet tag="policy">
+                            <l7:Resource type="policy">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+                                &lt;wsp:Policy xmlns:L7p=&quot;http://www.layer7tech.com/ws/policy&quot; xmlns:wsp=&quot;http://schemas.xmlsoap.org/ws/2002/12/policy&quot;&gt;
+                                &lt;wsp:All wsp:Usage=&quot;Required&quot;&gt;
+                                &lt;L7p:Regex&gt;
+                                &lt;L7p:AutoTarget booleanValue=&quot;false&quot;/&gt;
+                                &lt;L7p:CaseInsensitive booleanValue=&quot;true&quot;/&gt;
+                                &lt;L7p:Regex stringValue=&quot;Hello [a-zA-Z0-9]*&quot;/&gt;
+                                &lt;L7p:RegexName stringValue=&quot;Replace Hello&quot;/&gt;
+                                &lt;L7p:Replace booleanValue=&quot;true&quot;/&gt;
+                                &lt;L7p:Replacement stringValue=&quot;Hello gateway&quot;/&gt;
+                                &lt;/L7p:Regex&gt;
+                                &lt;L7p:HardcodedResponse&gt;
+                                &lt;L7p:Base64ResponseBody stringValue=&quot;WW91IHNhaWQ6ICR7cmVxdWVzdC5tYWlucGFydH0=&quot;/&gt;
+                                &lt;L7p:ResponseContentType stringValue=&quot;text/plain; charset=UTF-8&quot;/&gt;
+                                &lt;/L7p:HardcodedResponse&gt;
+                                &lt;/wsp:All&gt;
+                                &lt;/wsp:Policy&gt;
+                            </l7:Resource>
+                        </l7:ResourceSet>
+                    </l7:Resources>
+                </l7:Service>
+            </l7:Resource>
+        </l7:Item>
+        <l7:Item>
+            <l7:Name>Hello World</l7:Name>
+            <l7:Id>43292ae12367e1367d6b21c08876da56</l7:Id>
+            <l7:Type>SERVICE</l7:Type>
+            <l7:Resource>
+                <l7:Service id="43292ae12367e1367d6b21c08876da56">
+                    <l7:ServiceDetail folderId="43292ae12367e1367d6b21c08876d9c7" id="43292ae12367e1367d6b21c08876da56">
+                        <l7:Name>Hello World</l7:Name>
+                        <l7:Enabled>true</l7:Enabled>
+                        <l7:ServiceMappings>
+                            <l7:HttpMapping>
+                                <l7:UrlPattern>/hi</l7:UrlPattern>
+                                <l7:Verbs>
+                                    <l7:Verb>GET</l7:Verb>
+                                    <l7:Verb>POST</l7:Verb>
+                                    <l7:Verb>PUT</l7:Verb>
+                                    <l7:Verb>DELETE</l7:Verb>
+                                </l7:Verbs>
+                            </l7:HttpMapping>
+                        </l7:ServiceMappings>
+                        <l7:Properties>
+                            <l7:Property key="internal">
+                                <l7:BooleanValue>false</l7:BooleanValue>
+                            </l7:Property>
+                            <l7:Property key="soap">
+                                <l7:BooleanValue>false</l7:BooleanValue>
+                            </l7:Property>
+                            <l7:Property key="tracingEnabled">
+                                <l7:BooleanValue>false</l7:BooleanValue>
+                            </l7:Property>
+                            <l7:Property key="wssProcessingEnabled">
+                                <l7:BooleanValue>false</l7:BooleanValue>
+                            </l7:Property>
+                        </l7:Properties>
+                    </l7:ServiceDetail>
+                    <l7:Resources>
+                        <l7:ResourceSet tag="policy">
+                            <l7:Resource type="policy">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+                                &lt;wsp:Policy xmlns:L7p=&quot;http://www.layer7tech.com/ws/policy&quot; xmlns:wsp=&quot;http://schemas.xmlsoap.org/ws/2002/12/policy&quot;&gt;
+                                &lt;wsp:All wsp:Usage=&quot;Required&quot;&gt;
+                                &lt;L7p:HelloWorld/&gt;
+                                &lt;/wsp:All&gt;
+                                &lt;/wsp:Policy&gt;
+                            </l7:Resource>
+                        </l7:ResourceSet>
+                    </l7:Resources>
+                </l7:Service>
+            </l7:Resource>
+        </l7:Item>
+        <l7:Item>
+            <l7:Name>HelloWorld</l7:Name>
+            <l7:Id>655ed52128bbe82516c9d28de6a7f201</l7:Id>
+            <l7:Type>SSG_CONNECTOR</l7:Type>
+            <l7:Resource>
+                <l7:ListenPort id="655ed52128bbe82516c9d28de6a7f201">
+                    <l7:Name>HelloWorld</l7:Name>
+                    <l7:Enabled>true</l7:Enabled>
+                    <l7:Protocol>HelloWorld.SCHEME</l7:Protocol>
+                    <l7:Port>8081</l7:Port>
+                    <l7:EnabledFeatures>
+                        <l7:StringValue>Published service message input</l7:StringValue>
+                    </l7:EnabledFeatures>
+                    <l7:TargetServiceReference id="43292ae12367e1367d6b21c08876da0a" resourceUri="http://ns.l7tech.com/2010/04/gateway-management/services"/>
+                    <l7:Properties>
+                        <l7:Property key="useExtendedFtpCommandSet">
+                            <l7:StringValue>false</l7:StringValue>
+                        </l7:Property>
+                    </l7:Properties>
+                </l7:ListenPort>
+            </l7:Resource>
+        </l7:Item>
+    </l7:References>
+    <l7:Mappings>
+        <l7:Mapping action="NewOrExisting" srcId="0000000000000000ffffffffffffec76" type="FOLDER">
+            <l7:Properties>
+                <l7:Property key="FailOnNew">
+                    <l7:BooleanValue>true</l7:BooleanValue>
+                </l7:Property>
+            </l7:Properties>
+        </l7:Mapping>
+        <l7:Mapping action="NewOrExisting" srcId="43292ae12367e1367d6b21c08876d9c7" type="FOLDER"/>
+        <l7:Mapping action="NewOrExisting" srcId="43292ae12367e1367d6b21c08876da0a" type="SERVICE"/>
+        <l7:Mapping action="NewOrExisting" srcId="43292ae12367e1367d6b21c08876da56" type="SERVICE"/>
+        <l7:Mapping action="NewOrExisting" srcId="655ed52128bbe82516c9d28de6a7f201" type="SSG_CONNECTOR"/>
+    </l7:Mappings>
+</l7:Bundle>

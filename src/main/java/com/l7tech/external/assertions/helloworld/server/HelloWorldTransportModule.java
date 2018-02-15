@@ -8,7 +8,6 @@ import com.l7tech.objectmodel.Goid;
 import com.l7tech.server.DefaultKey;
 import com.l7tech.server.GatewayFeatureSets;
 import com.l7tech.server.GatewayState;
-import com.l7tech.server.LifecycleException;
 import com.l7tech.server.audit.AuditContextUtils;
 import com.l7tech.server.event.system.ReadyForMessages;
 import com.l7tech.server.identity.cert.TrustedCertServices;
@@ -49,6 +48,7 @@ public class HelloWorldTransportModule extends TransportModule implements Applic
 
     /**
      * Returns transport module instance.
+     *
      * @param context running application context
      * @return transport module instance
      */
@@ -118,11 +118,11 @@ public class HelloWorldTransportModule extends TransportModule implements Applic
 
     @Override
     public void reportMisconfiguredConnector(Goid goid) {
-        logger.log(Level.WARNING, MODULE_IDENTITY_TAG + " connector reported mis-configured: ID=" + goid);
+        logger.log(Level.WARNING, "%s connector reported mis-configured: ID=%s", new Object[]{MODULE_IDENTITY_TAG, goid});
     }
 
     @Override
-    protected void doStart() throws LifecycleException {
+    protected void doStart() {
         // Register the transport scheme(s) on module initialization
         registerSchemes();
 
@@ -133,7 +133,7 @@ public class HelloWorldTransportModule extends TransportModule implements Applic
     }
 
     @Override
-    protected void doStop() throws LifecycleException {
+    protected void doStop() {
         // Stop the connectors owned by this transport module
         stopConnectors();
 
@@ -142,7 +142,7 @@ public class HelloWorldTransportModule extends TransportModule implements Applic
     }
 
     @Override
-    protected void doClose() throws LifecycleException {
+    protected void doClose() {
         applicationEventProxy.removeApplicationListener(this);
     }
 
@@ -158,6 +158,7 @@ public class HelloWorldTransportModule extends TransportModule implements Applic
 
     /**
      * Performs series of checks on connector before creating transport server using it.
+     *
      * @param ssgConnector SsgConnector used to create transport server
      * @return true if transport server is allowed to create using specified connector.
      */
@@ -181,9 +182,10 @@ public class HelloWorldTransportModule extends TransportModule implements Applic
 
     /**
      * Creates and starts transport server using connector.
+     *
      * @param connector SsgConnector used to create transport server
      * @return HelloWorld transport server instance
-     * @throws ListenerException
+     * @throws ListenerException Thrown if there is an error trying to start the listener
      */
     private HelloWorldTransportServer createAndStartTransportServer(final SsgConnector connector) throws ListenerException {
         try {
@@ -193,7 +195,7 @@ public class HelloWorldTransportModule extends TransportModule implements Applic
             return transportServer;
         } catch (IllegalArgumentException iae) {
             throw new ListenerException(getMessage(iae), getDebugException(iae));
-        } catch (Throwable t) {
+        } catch (Exception t) {
             auditError(connector.getScheme(), "Error starting connector " + describe(connector), t);
             throw new ListenerException("Unable to create " + connector.getScheme() + " transport server: " + getMessage(t), t);
         }
@@ -201,13 +203,12 @@ public class HelloWorldTransportModule extends TransportModule implements Applic
 
     /**
      * Returns new transport server instance.
+     *
      * @param connector SsgConnector instance used to create transprt server
      * @return HelloWorld transport server
-     * @throws ListenerException
-     * @throws IOException
      */
     private HelloWorldTransportServer newTransportServer(final SsgConnector connector) throws ListenerException, IOException {
-        return new HelloWorldTransportServer(connector, this,
+        return new HelloWorldTransportServer(connector,
                 HelloWorldTransportHelper.getBindAddress(ssgConnectorManager, connector), connector.getPort(), injector);
     }
 
@@ -241,8 +242,8 @@ public class HelloWorldTransportModule extends TransportModule implements Applic
 
         try {
             AuditContextUtils.setSystem(true);
-            final Collection<SsgConnector> connectors = ssgConnectorManager.findAll();
-            for (final SsgConnector connector : connectors) {
+            final Collection<SsgConnector> connectorsFromManager = ssgConnectorManager.findAll();
+            for (final SsgConnector connector : connectorsFromManager) {
                 startConnector(connector);
             }
         } catch (FindException e) {
@@ -254,6 +255,7 @@ public class HelloWorldTransportModule extends TransportModule implements Applic
 
     /**
      * Stars the connector owned by this transport module.
+     *
      * @param connector SsgConnector owned by this transport module
      */
     private void startConnector(final SsgConnector connector) {
