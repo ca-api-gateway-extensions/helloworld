@@ -31,7 +31,7 @@ public class ServerHelloWorldAssertion extends AbstractServerAssertion<HelloWorl
     }
 
     public AssertionStatus checkRequest(final PolicyEnforcementContext context) throws IOException {
-        context.getResponse().initialize(ContentTypeHeader.TEXT_DEFAULT, "HelloWorld".getBytes());
+        context.getResponse().initialize(ContentTypeHeader.TEXT_DEFAULT, "Hello World!".getBytes());
         return AssertionStatus.NONE;
     }
 

@@ -14,7 +14,7 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath 'com.ca.apim.gateway:ModularAssertionBuilder:0.3.02-SNAPSHOT'
+        classpath 'com.ca.apim.gateway:ModularAssertionBuilder:0.3.03-SNAPSHOT'
     }
 }
 
@@ -37,7 +37,9 @@ dependencies {
             "com.l7tech:layer7-policy:$modularAssertionBuilder.gatewayBaseVersion",
             "com.l7tech:layer7-gateway-common:$modularAssertionBuilder.gatewayBaseVersion",
             "com.l7tech:layer7-gateway-server:$modularAssertionBuilder.gatewayBaseVersion",
-            "com.l7tech:layer7-gateway-console:$modularAssertionBuilder.gatewayBaseVersion"
+            "com.l7tech:layer7-gateway-console:$modularAssertionBuilder.gatewayBaseVersion",
+            "org.springframework:spring-context:3.0.7.RELEASE",
+            "javax.inject:javax.inject:1"
     )
 
     testCompile(

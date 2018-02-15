@@ -12,6 +12,7 @@ services:
       - /opt/SecureSpan/Gateway/node/default/etc/bootstrap/services/restman
       - ./license.xml:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/license/license.xml
       - ./build/libs/Hello-World-Assertion-0.1.01.aar:/opt/SecureSpan/Gateway/runtime/modules/assertions/Hello-World-Assertion-0.1.01.aar
+      - ./helloworld.bundle:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/helloworld.bundle
     environment:
       ACCEPT_LICENSE: "true"
       SSG_ADMIN_USERNAME: "admin"

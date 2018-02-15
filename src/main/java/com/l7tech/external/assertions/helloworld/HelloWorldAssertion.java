@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
+ * Hello World : Example modular assertion for the CA API Gateway
  */
 public class HelloWorldAssertion extends Assertion implements UsesVariables {
 
@@ -23,20 +23,22 @@ public class HelloWorldAssertion extends Assertion implements UsesVariables {
     }
 
     private static final String META_INITIALIZED = HelloWorldAssertion.class.getName() + ".metadataInitialized";
+    private static final String BASE_NAMESPACE = "com.l7tech.external.assertions.helloworld";
 
     @Override
     public AssertionMetadata meta() {
-        DefaultAssertionMetadata meta = super.defaultMeta();
+        final DefaultAssertionMetadata meta = super.defaultMeta();
         if (Boolean.TRUE.equals(meta.get(META_INITIALIZED)))
             return meta;
 
         // Cluster properties used by this assertion
-        Map<String, String[]> props = new HashMap<>();
+        final Map<String, String[]> props = new HashMap<>();
         meta.put(AssertionMetadata.CLUSTER_PROPERTIES, props);
 
         // Set description for GUI
-        meta.put(AssertionMetadata.SHORT_NAME, "Hello World");
-        meta.put(AssertionMetadata.LONG_NAME, "Hello World");
+        meta.put(AssertionMetadata.SHORT_NAME, HelloWorldConstants.MODULE_IDENTITY_FRIENDLY_TAG);
+        meta.put(AssertionMetadata.LONG_NAME, HelloWorldConstants.MODULE_IDENTITY_FRIENDLY_TAG);
+        meta.put(AssertionMetadata.DESCRIPTION, "This is an example modular assertion for the CA API Gateway");
 
         // Add to palette folder(s) 
         //   accessControl, transportLayerSecurity, xmlSecurity, xml, routing, 
@@ -48,7 +50,10 @@ public class HelloWorldAssertion extends Assertion implements UsesVariables {
         meta.put(AssertionMetadata.POLICY_ADVICE_CLASSNAME, "auto");
 
         // Specify the properties editor dialog class
-        meta.put(AssertionMetadata.PROPERTIES_EDITOR_CLASSNAME, "com.l7tech.external.assertions.helloworld.console.HelloWorldAssertionPropertiesDialog");
+        meta.put(AssertionMetadata.PROPERTIES_EDITOR_CLASSNAME, BASE_NAMESPACE + ".console.HelloWorldAssertionPropertiesDialog");
+
+        // Wire up the Module Load Listener here. It gets invoked when the module is loaded.
+        meta.put(AssertionMetadata.MODULE_LOAD_LISTENER_CLASSNAME, BASE_NAMESPACE + ".server.HelloWorldModuleLoadListener");
 
         // Set up smart Getter for nice, informative policy node name, for GUI
         meta.put(AssertionMetadata.POLICY_NODE_ICON, "com/l7tech/console/resources/MessageLength-16x16.gif");

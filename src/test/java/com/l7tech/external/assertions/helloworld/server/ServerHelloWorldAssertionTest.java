@@ -47,7 +47,7 @@ public class ServerHelloWorldAssertionTest {
         AssertionStatus status = serverHelloWorldAssertion.checkRequest(policyEnforcementContext);
 
         Assert.assertEquals(AssertionStatus.NONE, status);
-        Assert.assertEquals("HelloWorld", IOUtils.toString(response.getMimeKnob().getEntireMessageBodyAsInputStream()));
+        Assert.assertEquals("Hello World!", IOUtils.toString(response.getMimeKnob().getEntireMessageBodyAsInputStream()));
     }
 
 }
