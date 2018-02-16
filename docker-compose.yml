@@ -11,7 +11,7 @@ services:
       - "8081:8081"
     volumes:
       - /opt/SecureSpan/Gateway/node/default/etc/bootstrap/services/restman
-      - ./license.xml:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/license/license.xml
+      - ./docker/license.xml:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/license/license.xml
       - ./build/libs/Hello-World-Assertion-0.1.01.aar:/opt/SecureSpan/Gateway/runtime/modules/assertions/Hello-World-Assertion-0.1.01.aar
       - ./docker/helloworld.req.bundle:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/helloworld.req.bundle
     environment:
