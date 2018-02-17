@@ -1,5 +1,12 @@
 # About
-The gateway Helloworld assertion repository is an example repository for a modular assertion.
+The gateway HelloWorld assertion repository is an example repository for a modular assertion. It describes how the CA API Gateway can be extended. 
+
+# Features
+* Simple assertion to leave the response text as "Hello World!".
+* Introducing new scheme/protocol (i.e. HelloWorld.SCHEME) and hence user can define listen port using it.
+  * Supports HTTP requests.
+  * Treats every line of input text as separate message and pushes to a hardwired to service policy for further processing.
+  * Processed responses for each line will be concatinated and returned in the HTTP reponse body.
 
 # Build
 In order to build the modular assertion run `gradle build`.
@@ -7,7 +14,7 @@ In order to build the modular assertion run `gradle build`.
 This will compile, test, and create the aar file. It will be available in build/libs
 
 # Adding Libraries
-In order to build modular assertions some gateway jars are required they need to be put into a `lib` directory. The required jars are:
+In order to build modular assertions some Gateway jars are required they need to be put into a `lib` directory. The required jars are:
 * layer7-common-9.2.00.jar
 * layer7-gateway-common-9.2.00.jar
 * layer7-gateway-server-9.2.00.jar
@@ -16,6 +23,62 @@ In order to build modular assertions some gateway jars are required they need to
 * layer7-utility-9.2.00.jar
 * layer7-gateway-console-9.2.00.jar
   * This is the `Manager.jar` from the policy manager.
+
+Few more from the third party libraries.
+* spring-context-3.0.7.RELEASE.jar
+* javax.inject-1.jar
+
+# Run
+Docker version of Gateway greatly helps us to deploy assertions / RESTMAN bundles quickly. Please follow the steps below to run the container Gateway prepopulated with this example assertion and example services.
+1) Open Shell or Command Prompt and navigate to the directory where this repository is cloned.
+2) Build the HelloWorld Assertion
+   ```
+     gradle build
+   ```
+3) Ensure your docker environment is properly setup. 
+4) Provide the Gateway license at `docker/license.xml` while running the container.
+5) Execute the below docker-compose command to run the CA API Gateway container.
+   ```
+     docker-compose up
+   ```
+   * Provided `docker-compose.yml` ensures pulling the latest CA API Gateway image from the Docker Hub public repository and deploys the Helloworld assertion that was just build.
+   * In addition, it publishes one listen port and two services using `docker/helloworld.req.bundle` RESTMAN bundle.
+     * Hello World [/Hi] Service: Returns response text as "Hello World!".
+     * Pre-configured listen port 8081 with HelloWorld.SCHEME scheme/protocol.
+     * Hello World Scheme Default Handler Service: Hard wired to the listen port 8081. It looks for [Hello .*] pattern in the body of an http request and replaces it with "Hello gateway".
+6) Wait untill the Gateway container is started and is ready to recieve messages.
+
+# Test the Hello World service
+```
+curl http://localhost:8080/hi
+```
+Expected response: Hello World!
+
+# Test the listen port with HelloWorld.SCHEME
+
+Prepare your input as multiple lines
+```
+echo Hi > input.txt
+echo Hello World >> input.txt
+```
+
+Send the message from the file to listen port 8081
+```
+curl --data-binary @input.txt http://<docker-host>:8081
+```
+Expected response is as follows:
+```
+You said: Hi
+You said: Hello gateway
+```
+
+# How to create new listen port with HelloWorld.SCHEME
+1) Connect to the running Gateway via Policy Manager. You can find the admin credentials from the docker-compose file. 
+2) Navigate to Tasks -> Transports -> Manage Listen Ports to open the Manage Listen Ports window.
+3) Click on Create button to define new listen port with HelloWorld.SCHEME scheme/protocol.
+4) In the Advanced tab of Listen Port Properties dialog, choose the service to process the incoming messages.
+5) Click on OK button.
+
 
 ## How You Can Contribute
 Contributions are welcome and much appreciated. To learn more, see the [Contribution Guidelines][contributing].
