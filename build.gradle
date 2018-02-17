@@ -4,19 +4,12 @@
  * of the MIT license.  See the LICENSE file for details.
  */
 
+plugins {
+    id "com.ca.apim.gateway.modular-assertion-builder" version "0.4.00"
+}
+
 group 'com.ca'
 version '0.1.01'
-
-apply plugin: 'com.ca.apim.gateway.modular-assertion-builder'
-
-buildscript {
-    repositories {
-        mavenLocal()
-    }
-    dependencies {
-        classpath 'com.ca.apim.gateway:ModularAssertionBuilder:0.3.03-SNAPSHOT'
-    }
-}
 
 repositories {
     flatDir {
