@@ -41,4 +41,4 @@ By contributing to gateway-assertion-helloworld, you agree that your contributio
 
  [community]: https://communities.ca.com/community/ca-api-management-community/content?filterID=contentstatus%5Bpublished%5D~category%5Bca-api-gateway%5D
  [license-link]: /LICENSE
- [cla]: https://www.clahub.com/agreements/CAAPIM/gateway-assertion-helloworld
+ [cla]: https://www.clahub.com/agreements/ca-api-gateway-extensions/helloworld
