@@ -15,7 +15,7 @@ Follow these steps for pull requests:
 ### Contributor License Agreement ("CLA")
 To accept pull requests, submit a CLA. (Submitting a single CLA lets you work on any open source projects from CA, Inc.)
 
-Complete your CLA here: <https://www.clahub.com/agreements/CAAPIM/gateway-assertion-helloworld>
+Complete your CLA here: [Contributor License Agreement ("CLA")][cla]
 
 ## Bugs
 We work hard to avoid them, but they still happen. Use GitHub issues to report bug and other issues.
